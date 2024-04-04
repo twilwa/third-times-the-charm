@@ -1,45 +1,24 @@
-from dataclasses import dataclass
-from dagster import ConfigurableResource, Field, StringSource
+from dagster import resource, Field, StringSource
 import praw
 
-@dataclass
-class RedditClientConfig:
-    client_id: str
-    client_secret: str
-    user_agent: str
-    username: str
-    password: str
 
-class RedditClientResource(ConfigurableResource):
-    def __init__(self, config: RedditClientConfig):
-        self.reddit = praw.Reddit(
-            client_id=config.client_id,
-            client_secret=config.client_secret,
-            user_agent=config.user_agent,
-            username=config.username,
-            password=config.password,
-        )
+@resource(
+    {
+        "client_id": Field(StringSource),
+        "client_secret": Field(StringSource),
+        "user_agent": Field(
+            StringSource, is_required=False, default_value="dagster_reddit_client/0.1"
+        ),
+        "username": Field(StringSource),
+        "password": Field(StringSource),
+    }
+)
+def reddit_client(init_context):
+    return praw.Reddit(
+        client_id=init_context.resource_config["client_id"],
+        client_secret=init_context.resource_config["client_secret"],
+        user_agent=init_context.resource_config.get("user_agent"),
+        username=init_context.resource_config["username"],
+        password=init_context.resource_config["password"],
+    )
 
-    @staticmethod
-    def config_schema():
-        return {
-            "client_id": Field(StringSource),
-            "client_secret": Field(StringSource),
-            "user_agent": Field(StringSource),
-            "username": Field(StringSource),
-            "password": Field(StringSource),
-        }
-
-    def get_client(self):
-        return self.reddit
-
-# Optional: For complex data transformations
-class RedditDataTranslator:
-    @staticmethod
-    def translate(submission):
-        # Example translation method
-        return {
-            "title": submission.title,
-            "url": submission.url,
-            "content": submission.selftext,
-        }

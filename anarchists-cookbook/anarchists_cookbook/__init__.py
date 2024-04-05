@@ -13,6 +13,8 @@ from . import assets
 
 from .resources.reddit_resource import reddit_client
 
+from .assets.reddit_posts_comments_df import reddit_submissions
+
 defs = Definitions(
     assets=load_assets_from_modules([assets]),  # Adjust as necessary
     resources={

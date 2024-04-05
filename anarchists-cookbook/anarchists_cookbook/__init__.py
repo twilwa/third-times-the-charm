@@ -22,4 +22,10 @@ defs = Definitions(
         # Include other resources as before
     },
 )
+# Define a job for the reddit_submissions asset
+reddit_submissions_job = define_asset_job(
+    "reddit_submissions_job",
+    selection=AssetSelection.assets(reddit_submissions),
+)
+
 # TODO: import redditdatagenerator from .resources, see tutorial/__init__.py

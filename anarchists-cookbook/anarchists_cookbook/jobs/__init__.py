@@ -1,5 +1,5 @@
 from dagster import job
-from ..assets.reddit_posts_comments_df import reddit_submissions()
+from ..assets.reddit_posts_comments_df import reddit_submissions
 from ..resources import reddit_client_resource
 
 

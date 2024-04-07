@@ -1,13 +1,21 @@
 from dagster import asset, OpExecutionContext, Field, StringSource
-from pandasai import SmartDataframe
 import pandasai as pd
+
 
 @asset(
     required_resource_keys={"reddit_client"},
     config_schema={
-        "subreddit_name": Field(StringSource, default_value="python", description="The name of the subreddit to fetch submissions from."),
-        "submissions_limit": Field(int, default_value=5, description="The number of submissions to fetch from each category.")
-    }
+        "subreddit_name": Field(
+            StringSource,
+            default_value="python",
+            description="The name of the subreddit to fetch submissions from.",
+        ),
+        "submissions_limit": Field(
+            int,
+            default_value=5,
+            description="The number of submissions to fetch from each category.",
+        ),
+    },
 )
 def reddit_submissions(context: OpExecutionContext):
     reddit = context.resources.reddit_client

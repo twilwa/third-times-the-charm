@@ -1,0 +1,7 @@
+# workspace.yaml
+
+# load_from:
+  # - python_file:
+      # relative_path: third-times-the-charm/anarchists-cookbook/anarchists_cookbook/__init__.py
+      # working_directory: anarchists-cookbook/anarchists_cookbook
+      # executable_path: .venv/bin/python

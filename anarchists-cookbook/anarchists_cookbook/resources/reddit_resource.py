@@ -1,16 +1,16 @@
-from dagster import resource, Field, StringSource
+from dagster import resource, Field, StringSource, EnvVar
 import praw
+import os
+from dotenv import load_dotenv
 
-
+load_dotenv()
 @resource(
     {
-        "client_id": Field(StringSource),
-        "client_secret": Field(StringSource),
-        "user_agent": Field(
-            StringSource, is_required=False, default_value="dagster_reddit_client/0.1"
-        ),
-        "username": Field(StringSource),
-        "password": Field(StringSource),
+        "client_id": Field(StringSource, is_required=True),
+        "client_secret": Field(StringSource, is_required=True),
+        "user_agent": Field(StringSource, is_required=False, default_value="dagster_reddit_client/0.1"),
+        "username": Field(StringSource, is_required=True),
+        "password": Field(StringSource, is_required=True),
     }
 )
 def reddit_client(init_context):
@@ -21,4 +21,3 @@ def reddit_client(init_context):
         username=init_context.resource_config["username"],
         password=init_context.resource_config["password"],
     )
-

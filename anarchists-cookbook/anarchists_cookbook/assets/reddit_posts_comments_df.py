@@ -1,5 +1,6 @@
 from dagster import asset, OpExecutionContext, Field, StringSource
-import pandasai as pd
+import pandasai as pdai
+import pandas as pd
 
 
 @asset(
@@ -38,4 +39,4 @@ def reddit_submissions(context: OpExecutionContext):
             submissions_data["url"].append(submission.url)
             submissions_data["text_content"].append(submission.selftext)
 
-    return pd.SmartDataframe(submissions_data)
+    return pd.DataFrame(submissions_data)

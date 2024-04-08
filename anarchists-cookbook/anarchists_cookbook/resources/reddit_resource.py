@@ -1,14 +1,17 @@
-from dagster import resource, Field, StringSource, EnvVar
+from dagster import resource, Field, StringSource
 import praw
-import os
 from dotenv import load_dotenv
 
 load_dotenv()
+
+
 @resource(
     {
         "client_id": Field(StringSource, is_required=True),
         "client_secret": Field(StringSource, is_required=True),
-        "user_agent": Field(StringSource, is_required=False, default_value="dagster_reddit_client/0.1"),
+        "user_agent": Field(
+            StringSource, is_required=False, default_value="dagster_reddit_client/0.1"
+        ),
         "username": Field(StringSource, is_required=True),
         "password": Field(StringSource, is_required=True),
     }

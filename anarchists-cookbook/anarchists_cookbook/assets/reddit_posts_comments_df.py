@@ -35,8 +35,7 @@ RedditSubmissionsDataFrame = create_dagster_pandas_dataframe_type(
             description="The number of comments to fetch from each submission.",
         ),
     },
-    output_required=True,
-    ouput_schema=RedditSubmissionsDataFrame,
+    output_asset_type=RedditSubmissionsDataFrame,
 )
 def reddit_submissions(context: OpExecutionContext):
     reddit = context.resources.reddit_client

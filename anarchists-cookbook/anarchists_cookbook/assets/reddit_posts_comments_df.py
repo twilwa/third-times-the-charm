@@ -20,17 +20,17 @@ RedditSubmissionsDataFrame = create_dagster_pandas_dataframe_type(
     required_resource_keys={"reddit_client"},
     config_schema={
         "subreddit_names": Field(
-            List[StringSource],
+            List[str],
             default_value=["all"],
             description="The names of the subreddits to fetch submissions from.",
         ),
         "submissions_limit": Field(
-            IntSource,
+            int,
             default_value=5,
             description="The number of submissions to fetch from each category.",
         ),
         "comments_limit": Field(
-            IntSource,
+            int,
             default_value=20,
             description="The number of comments to fetch from each submission.",
         ),

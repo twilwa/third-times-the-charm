@@ -20,7 +20,7 @@ RedditSubmissionsDataFrame = create_dagster_pandas_dataframe_type(
     required_resource_keys={"reddit_client"},
     config_schema={
         "subreddit_names": Field(
-            [StringSource],
+            List[StringSource],
             default_value=["all"],
             description="The names of the subreddits to fetch submissions from.",
         ),
@@ -65,9 +65,7 @@ def reddit_submissions(context: OpExecutionContext):
                 submissions_data["text_content"].append(submission.selftext)
 
     df = pd.DataFrame(submissions_data)
-    output_path = os.path.join(
-        context.run_config["output_dir"], "reddit_submissions.csv"
-    )
+    output_path = os.path.join(context.run_config["output_dir"], "reddit_submissions.csv")
     df.to_csv(output_path, index=False)
 
     return df

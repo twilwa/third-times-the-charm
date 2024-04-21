@@ -1,6 +1,14 @@
 import os
 import pandas as pd
-from dagster import asset, OpExecutionContext, Field, StringSource, IntSource, List
+from dagster import (
+    Array,
+    asset,
+    OpExecutionContext,
+    Field,
+    StringSource,
+    IntSource,
+    List,
+)
 from dagster_pandas import PandasColumn, create_dagster_pandas_dataframe_type
 
 RedditSubmissionsDataFrame = create_dagster_pandas_dataframe_type(
@@ -20,7 +28,7 @@ RedditSubmissionsDataFrame = create_dagster_pandas_dataframe_type(
     required_resource_keys={"reddit_client"},
     config_schema={
         "subreddit_names": Field(
-            List[str],
+            Array[str],
             default_value=["all"],
             description="The names of the subreddits to fetch submissions from.",
         ),

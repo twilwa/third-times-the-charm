@@ -29,6 +29,7 @@ RedditSubmissionsDataFrame = create_dagster_pandas_dataframe_type(
     config_schema={
         "subreddit_names": Field(
             Array[str],
+            Array[str],
             default_value=["all"],
             description="The names of the subreddits to fetch submissions from.",
         ),

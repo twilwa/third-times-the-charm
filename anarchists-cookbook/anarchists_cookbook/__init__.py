@@ -4,6 +4,9 @@ from dagster import (
 )
 from dotenv import load_dotenv
 
+load_dotenv()
+from dotenv import load_dotenv
+
 from .assets import reddit_posts_comments_df
 from .jobs import reddit_job
 from .resources import reddit_client

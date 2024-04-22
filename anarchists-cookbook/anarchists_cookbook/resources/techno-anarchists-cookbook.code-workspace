@@ -1,0 +1,20 @@
+{
+	"folders": [
+		{
+			"path": "../../../../techno-anarchists-cookbook"
+		},
+		{
+			"path": "../../.."
+		},
+		{
+			"path": "../../../../dagster_university"
+		},
+		{
+			"path": "../../../../dagster"
+		},
+		{
+			"path": "../../../../../active-tools-stack/RepoToText"
+		}
+	],
+	"settings": {}
+}

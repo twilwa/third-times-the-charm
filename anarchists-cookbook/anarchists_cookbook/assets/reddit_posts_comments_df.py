@@ -1,14 +1,7 @@
 import os
+from dagster._config.config_type import Array
 import pandas as pd
-from dagster import (
-    Array,
-    asset,
-    OpExecutionContext,
-    Field,
-    StringSource,
-    IntSource,
-    List,
-)
+from dagster import asset, OpExecutionContext, Field, StringSource, IntSource, List
 from dagster_pandas import PandasColumn, create_dagster_pandas_dataframe_type
 
 RedditSubmissionsDataFrame = create_dagster_pandas_dataframe_type(
@@ -28,8 +21,7 @@ RedditSubmissionsDataFrame = create_dagster_pandas_dataframe_type(
     required_resource_keys={"reddit_client"},
     config_schema={
         "subreddit_names": Field(
-            Array[str],
-            Array[str],
+            Array(StringSource),
             default_value=["all"],
             description="The names of the subreddits to fetch submissions from.",
         ),
@@ -44,7 +36,6 @@ RedditSubmissionsDataFrame = create_dagster_pandas_dataframe_type(
             description="The number of comments to fetch from each submission.",
         ),
     },
-    output_asset_type=RedditSubmissionsDataFrame,
 )
 def reddit_submissions(context: OpExecutionContext):
     reddit = context.resources.reddit_client

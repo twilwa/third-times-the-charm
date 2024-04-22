@@ -1,0 +1,63 @@
+[32m2024-04-21 18:14:27 -0700[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - 913d7677-46d4-4f01-8cb1-cdbe92d66859 - 1176685 - LOGS_CAPTURED - Started capturing logs in process (pid: 1176685).
+[32m2024-04-21 18:14:27 -0700[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - 913d7677-46d4-4f01-8cb1-cdbe92d66859 - 1176685 - reddit_submissions - STEP_START - Started execution of step "reddit_submissions".
+[32m2024-04-21 18:14:28 -0700[0m - dagster - [34mERROR[0m - [31m__ASSET_JOB - 913d7677-46d4-4f01-8cb1-cdbe92d66859 - 1176685 - reddit_submissions - STEP_FAILURE - Execution of step "reddit_submissions" failed.
+
+dagster._core.errors.DagsterExecutionStepExecutionError: Error occurred while executing op "reddit_submissions"::
+
+prawcore.exceptions.ResponseException: received 401 HTTP response
+
+Stack Trace:
+  File "/home/anon/ubuntu-repos/third-times-the-charm/.venv/lib/python3.12/site-packages/dagster/_core/execution/plan/utils.py", line 54, in op_execution_error_boundary
+    yield
+  File "/home/anon/ubuntu-repos/third-times-the-charm/.venv/lib/python3.12/site-packages/dagster/_utils/__init__.py", line 463, in iterate_with_context
+    next_output = next(iterator)
+                  ^^^^^^^^^^^^^^
+  File "/home/anon/ubuntu-repos/third-times-the-charm/.venv/lib/python3.12/site-packages/dagster/_core/execution/plan/compute_generator.py", line 131, in _coerce_op_compute_fn_to_iterator
+    result = invoke_compute_fn(
+             ^^^^^^^^^^^^^^^^^^
+  File "/home/anon/ubuntu-repos/third-times-the-charm/.venv/lib/python3.12/site-packages/dagster/_core/execution/plan/compute_generator.py", line 125, in invoke_compute_fn
+    return fn(context, **args_to_pass) if context_arg_provided else fn(**args_to_pass)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/anon/ubuntu-repos/third-times-the-charm/anarchists-cookbook/anarchists_cookbook/assets/reddit_posts_comments_df.py", line 60, in reddit_submissions
+    for submission in getattr(subreddit, category)(limit=submissions_limit):
+  File "/home/anon/ubuntu-repos/third-times-the-charm/.venv/lib/python3.12/site-packages/praw/models/listing/generator.py", line 63, in __next__
+    self._next_batch()
+  File "/home/anon/ubuntu-repos/third-times-the-charm/.venv/lib/python3.12/site-packages/praw/models/listing/generator.py", line 89, in _next_batch
+    self._listing = self._reddit.get(self.url, params=self.params)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/anon/ubuntu-repos/third-times-the-charm/.venv/lib/python3.12/site-packages/praw/util/deprecate_args.py", line 43, in wrapped
+    return func(**dict(zip(_old_args, args)), **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/anon/ubuntu-repos/third-times-the-charm/.venv/lib/python3.12/site-packages/praw/reddit.py", line 712, in get
+    return self._objectify_request(method="GET", params=params, path=path)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/anon/ubuntu-repos/third-times-the-charm/.venv/lib/python3.12/site-packages/praw/reddit.py", line 517, in _objectify_request
+    self.request(
+  File "/home/anon/ubuntu-repos/third-times-the-charm/.venv/lib/python3.12/site-packages/praw/util/deprecate_args.py", line 43, in wrapped
+    return func(**dict(zip(_old_args, args)), **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/anon/ubuntu-repos/third-times-the-charm/.venv/lib/python3.12/site-packages/praw/reddit.py", line 941, in request
+    return self._core.request(
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/anon/ubuntu-repos/third-times-the-charm/.venv/lib/python3.12/site-packages/prawcore/sessions.py", line 328, in request
+    return self._request_with_retries(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/anon/ubuntu-repos/third-times-the-charm/.venv/lib/python3.12/site-packages/prawcore/sessions.py", line 234, in _request_with_retries
+    response, saved_exception = self._make_request(
+                                ^^^^^^^^^^^^^^^^^^^
+  File "/home/anon/ubuntu-repos/third-times-the-charm/.venv/lib/python3.12/site-packages/prawcore/sessions.py", line 186, in _make_request
+    response = self._rate_limiter.call(
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/anon/ubuntu-repos/third-times-the-charm/.venv/lib/python3.12/site-packages/prawcore/rate_limit.py", line 46, in call
+    kwargs["headers"] = set_header_callback()
+                        ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/anon/ubuntu-repos/third-times-the-charm/.venv/lib/python3.12/site-packages/prawcore/sessions.py", line 282, in _set_header_callback
+    self._authorizer.refresh()
+  File "/home/anon/ubuntu-repos/third-times-the-charm/.venv/lib/python3.12/site-packages/prawcore/auth.py", line 473, in refresh
+    self._request_token(
+  File "/home/anon/ubuntu-repos/third-times-the-charm/.venv/lib/python3.12/site-packages/prawcore/auth.py", line 155, in _request_token
+    response = self._authenticator._post(url=url, **data)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/anon/ubuntu-repos/third-times-the-charm/.venv/lib/python3.12/site-packages/prawcore/auth.py", line 59, in _post
+    raise ResponseException(response)
+[0m

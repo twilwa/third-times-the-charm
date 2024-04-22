@@ -9,3 +9,10 @@ resources:
         env: REDDIT_USERNAME
       password:
         env: REDDIT_PASSWORD
+ops:
+  reddit_submissions:
+    config:
+      submissions_limit: 5
+      subreddit_names:
+        - "python"
+        - "locallama"

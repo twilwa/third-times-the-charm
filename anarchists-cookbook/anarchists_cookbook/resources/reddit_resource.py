@@ -1,4 +1,5 @@
 from dagster import resource, Field, StringSource
+from dagster import EnvVar
 import praw
 from dotenv import load_dotenv
 
@@ -7,13 +8,13 @@ load_dotenv()
 
 @resource(
     {
-        "client_id": Field(StringSource, is_required=True),
-        "client_secret": Field(StringSource, is_required=True),
+        "client_id": Field(EnvVar, is_required=True),
+        "client_secret": Field(EnvVar, is_required=True),
         "user_agent": Field(
-            StringSource, is_required=False, default_value="dagster_reddit_client/0.1"
+            EnvVar, is_required=False, default_value="dagster_reddit_client/0.1"
         ),
-        "username": Field(StringSource, is_required=True),
-        "password": Field(StringSource, is_required=True),
+        "username": Field(EnvVar, is_required=True),
+        "password": Field(EnvVar, is_required=True),
     }
 )
 def reddit_client(init_context):

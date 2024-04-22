@@ -1,15 +1,12 @@
-from .jobs import reddit_job
 from dagster import (
-    ConfigurableResource,
     Definitions,
     load_assets_from_modules,
-    EnvVar,
-    define_asset_job,
-    AssetSelection,
 )
-from .assets import reddit_posts_comments_df
-from .resources import reddit_client
 from dotenv import load_dotenv
+
+from .assets import reddit_posts_comments_df
+from .jobs import reddit_job
+from .resources import reddit_client
 
 load_dotenv()
 

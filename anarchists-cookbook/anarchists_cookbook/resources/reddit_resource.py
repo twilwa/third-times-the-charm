@@ -8,13 +8,13 @@ load_dotenv()
 
 @resource(
     {
-        "REDDIT_CLIENT_ID": Field(String, is_required=True),
-        "REDDIT_CLIENT_SECRET": Field(String, is_required=True),
+        "REDDIT_CLIENT_ID": Field(StringSource, is_required=True),
+        "REDDIT_CLIENT_SECRET": Field(StringSource, is_required=True),
         "user_agent": Field(
-            String, is_required=False, default_value="dagster_reddit_client/0.1"
+            StringSource, is_required=False, default_value="dagster_reddit_client/0.1"
         ),
-        "REDDIT_USERNAME": Field(String, is_required=True),
-        "REDDIT_PASSWORD": Field(String, is_required=True),
+        "REDDIT_USERNAME": Field(StringSource, is_required=True),
+        "REDDIT_PASSWORD": Field(StringSource, is_required=True),
     }
 )
 def reddit_client(init_context):

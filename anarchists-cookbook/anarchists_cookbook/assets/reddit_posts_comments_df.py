@@ -62,7 +62,10 @@ def reddit_submissions(context: OpExecutionContext):
                 submissions_data["category"].append(category)
                 submissions_data["title"].append(submission.title)
                 submissions_data["url"].append(submission.url)
-                submissions_data["text_content"].append(submission.selftext if submission.selftext else "")
+                submissions_data["text_content"].append(
+                    submission.selftext if submission.selftext else ""
+                )
+                submissions_data["comments"].append(submission.comments)
 
     df = pd.DataFrame(submissions_data)
     output_path = os.path.join(

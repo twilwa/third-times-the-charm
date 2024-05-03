@@ -12,6 +12,7 @@ resources:
 ops:
   reddit_submissions:
     config:
+      output_dir: ./csvs/
       submissions_limit: 5
       subreddit_names:
         - "python"
